@@ -10,7 +10,14 @@ const Routes = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Clean Air" component={Home} />
+        <Stack.Screen
+          name="Clean Air"
+          component={Home}
+          options={{
+            headerStyle: {backgroundColor: '#303C42'},
+            headerTintColor: '#fff',
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

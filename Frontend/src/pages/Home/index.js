@@ -1,13 +1,14 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-
-// import { Container } from './styles';
+import {Text} from 'react-native';
+import {Container} from './styles';
+import HomeButton from '../../components/HomeButton';
 
 const Home = () => {
   return (
-    <View>
+    <Container>
       <Text>Hello world</Text>
-    </View>
+      <HomeButton isAdd={false}> </HomeButton>
+    </Container>
   );
 };
 
