@@ -2,12 +2,12 @@ import React from 'react';
 import {Text} from 'react-native';
 import {Container} from './styles';
 
-import TimerModal from '../../components/TimerModal';
+import NewDeviceModal from '../../components/NewDeviceModal';
 
 const Home = () => {
   return (
     <Container>
-      <TimerModal />
+      <NewDeviceModal />
     </Container>
   );
 };
