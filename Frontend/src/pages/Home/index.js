@@ -1,13 +1,13 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {Container} from './styles';
-import HomeButton from '../../components/HomeButton';
-import PurifierCard from '../../components/PurifierCard';
+
+import TimerModal from '../../components/TimerModal';
 
 const Home = () => {
   return (
     <Container>
-      <PurifierCard />
+      <TimerModal />
     </Container>
   );
 };
