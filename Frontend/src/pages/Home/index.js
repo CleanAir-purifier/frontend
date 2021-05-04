@@ -1,13 +1,12 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {Container} from './styles';
 
-import NewDeviceModal from '../../components/NewDeviceModal';
+import DeviceCard from '../../components/DeviceCard';
 
 const Home = () => {
   return (
     <Container>
-      <NewDeviceModal />
+      <DeviceCard />
     </Container>
   );
 };

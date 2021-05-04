@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {OuterCircle, InnerCircle} from './styles';
@@ -20,20 +19,35 @@ const HomeButton = props => {
     // eslint-disable-next-line no-alert
     setIsOn(!isOn);
   }
+
+  function AddNewPurifier() {
+    props.onButtonClick(true);
+  }
+
   return (
-    <OuterCircle
-      activeOpacity={0.8}
-      onPress={() => {
-        onPressButton();
-      }}>
-      <InnerCircle>
-        {props.isAdd === true ? (
-          <Icon name="add" color="#7CB342" size={100} />
-        ) : (
-          <Icon name="power-settings-new" color={buttonColor} size={100} />
-        )}
-      </InnerCircle>
-    </OuterCircle>
+    <>
+      {props.isAdd ? (
+        <OuterCircle
+          activeOpacity={0.8}
+          onPress={() => {
+            AddNewPurifier();
+          }}>
+          <InnerCircle>
+            <Icon name="add" color="#7CB342" size={100} />
+          </InnerCircle>
+        </OuterCircle>
+      ) : (
+        <OuterCircle
+          activeOpacity={0.8}
+          onPress={() => {
+            onPressButton();
+          }}>
+          <InnerCircle>
+            <Icon name="power-settings-new" color={buttonColor} size={100} />
+          </InnerCircle>
+        </OuterCircle>
+      )}
+    </>
   );
 };
 

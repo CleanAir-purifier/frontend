@@ -1,5 +1,5 @@
-import React from 'react';
-import {Text, TextInput} from 'react-native';
+import React, {useState} from 'react';
+import {Text, Modal} from 'react-native';
 
 import {
   Container,
