@@ -18,6 +18,7 @@ export const BackgroundLogo = styled.Image`
 export const InfoTitle = styled.Text`
   font-family: 'Exo-Light';
   font-size: 24px;
+  color: #303c42;
 `;
 
 export const InfoView = styled.View`
@@ -34,6 +35,7 @@ export const InfoIconsRow = styled.View`
 export const TextInfo = styled.Text`
   font-family: 'Exo-Light';
   font-size: 24px;
+  color: #303c42;
 `;
 
 export const IconView = styled.TouchableOpacity`
@@ -54,4 +56,10 @@ export const InfoText = styled.Text`
   color: #303c42;
   margin-left: 10px;
   font-size: 16px;
+`;
+
+export const SelectedSpeed = styled.Text`
+  font-family: 'Exo-Bold';
+  font-size: 24px;
+  color: #7cb342;
 `;
