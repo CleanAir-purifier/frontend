@@ -15,8 +15,9 @@ const HomeButton = props => {
     }
   }, [isOn]);
 
-  function onPressButton() {
+  function powerPurifier() {
     // eslint-disable-next-line no-alert
+    props.powerPurifier(!isOn);
     setIsOn(!isOn);
   }
 
@@ -40,7 +41,7 @@ const HomeButton = props => {
         <OuterCircle
           activeOpacity={0.8}
           onPress={() => {
-            onPressButton();
+            powerPurifier();
           }}>
           <InnerCircle>
             <Icon name="power-settings-new" color={buttonColor} size={100} />

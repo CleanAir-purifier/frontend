@@ -12,16 +12,16 @@ const Routes = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen
-          name="Clean Air"
-          component={NoPurifier}
+          name="Home"
+          component={Home}
           options={{
             headerStyle: {backgroundColor: '#303C42'},
             headerTintColor: '#fff',
           }}
         />
         <Stack.Screen
-          name="Home"
-          component={Home}
+          name="Clean Air"
+          component={NoPurifier}
           options={{
             headerStyle: {backgroundColor: '#303C42'},
             headerTintColor: '#fff',
