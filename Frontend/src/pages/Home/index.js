@@ -20,19 +20,35 @@ import Water from 'react-native-vector-icons/Entypo';
 
 import HomeButton from '../../components/HomeButton';
 import {View, ScrollView, Dimensions, TouchableOpacity} from 'react-native';
+import { getDevices } from '../../service';
 
 const Home = () => {
   const windowWidth = Dimensions.get('window').width;
   const [isOn, setIsOn] = useState(true);
   const [progress, setProgress] = useState(100);
   const [temperature, setTemperature] = useState('');
-  const [moisture, setMoisture] = useState('');
+  const [humidity, setHumidity] = useState('');
   const [speed, setSpeed] = useState('1x');
   const [mode, setMode] = useState('auto');
+
+  const loadDevicesData = async () => {
+    getDevices(1)
+      .then((res) => {
+        console.log(res.data.active)
+        powerPurifier(res.data.active);
+      })
+      .catch((error) => {
+        console.log("error loading purifier data");
+      })
+  }
 
   function powerPurifier(power) {
     setIsOn(power);
   }
+
+  React.useEffect(() => {
+    loadDevicesData();
+  }, []);
 
   function renderSpeed() {
     switch (speed) {
@@ -103,7 +119,7 @@ const Home = () => {
     <Container>
       <BackgroundLogo source={require('../../assets/images/leaf.png')} />
       <View style={{marginTop: 30}} />
-      <HomeButton powerPurifier={powerPurifier} isAdd={false} />
+      <HomeButton powerPurifier={powerPurifier} isOn={isOn} isAdd={false} />
       {isOn ? (
         <ScrollView
           style={{marginTop: 20}}
@@ -134,14 +150,14 @@ const Home = () => {
                 <InfoTitle>Temperatura</InfoTitle>
                 <IconRow>
                   <Icon name="thermometer" color="#7CB342" size={40} />
-                  <InfoText>{moisture}</InfoText>
+                  <InfoText>{temperature}</InfoText>
                 </IconRow>
               </View>
               <View>
                 <InfoTitle>Umidade</InfoTitle>
                 <IconRow>
                   <Water name="water" color="#7CB342" size={40} />
-                  <InfoText>{temperature}</InfoText>
+                  <InfoText>{humidity}</InfoText>
                 </IconRow>
               </View>
             </InfoIconsRow>

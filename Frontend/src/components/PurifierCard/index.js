@@ -13,18 +13,6 @@ import {
 
 const PurifierCard = (props) => {
 
-  const getStatus = (status) => {
-    let text = "-";
-    if (status === "good") {
-      text = "Bom";
-    } else if (status === "medium") {
-      text = "Médio";
-    } else if (status === "bad") {
-      text = "Ruim";
-    }
-    return text;
-  }
-
   const renderStatusText = (status) => {
     let quality = "-";
     let textColor = "#7cb342";

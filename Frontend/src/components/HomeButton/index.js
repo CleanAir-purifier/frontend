@@ -4,21 +4,19 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {OuterCircle, InnerCircle} from './styles';
 
 const HomeButton = props => {
-  const [isOn, setIsOn] = useState(true);
   const [buttonColor, setButtonColor] = useState('#7CB342');
 
   useEffect(() => {
-    if (isOn) {
+    if (props.isOn) {
       setButtonColor('#7CB342');
     } else {
       setButtonColor('#C94242');
     }
-  }, [isOn]);
+  }, [props.isOn]);
 
   function powerPurifier() {
     // eslint-disable-next-line no-alert
-    props.powerPurifier(!isOn);
-    setIsOn(!isOn);
+    props.powerPurifier(!props.isOn);
   }
 
   function AddNewPurifier() {
