@@ -1,7 +1,10 @@
 import styled from 'styled-components/native';
+import {Dimensions} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
 
 export const Header = styled.View`
-  width: 85%;
+  width: ${windowWidth * 0.9}px;
   height: 150px;
   border-width: 4px;
   border-radius: 10px;
@@ -51,7 +54,7 @@ export const TitleView = styled.View`
 `;
 
 export const Context = styled.View`
-  width: 85%;
+  width: ${windowWidth * 0.9}px;
   height: 450px;
   border-width: 4px;
   border-radius: 10px;
