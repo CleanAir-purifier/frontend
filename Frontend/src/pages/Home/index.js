@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 import {
   Container,
@@ -21,19 +21,32 @@ import Water from 'react-native-vector-icons/Entypo';
 import HomeButton from '../../components/HomeButton';
 import {View, ScrollView, Dimensions, TouchableOpacity} from 'react-native';
 import NavBar from '../../components/NavBar';
+import {getDevices} from '../../service';
 
 const Home = () => {
   const windowWidth = Dimensions.get('window').width;
-  const [isOn, setIsOn] = useState(true);
+  const [isOn, setIsOn] = useState(false);
   const [progress, setProgress] = useState(100);
-  const [temperature, setTemperature] = useState('');
-  const [moisture, setMoisture] = useState('');
   const [speed, setSpeed] = useState('1x');
   const [mode, setMode] = useState('auto');
+
+  const loadDevicesData = async () => {
+    getDevices(1)
+      .then(res => {
+        powerPurifier(res.data.active);
+      })
+      .catch(error => {
+        console.log('error loading purifier data');
+      });
+  };
 
   function powerPurifier(power) {
     setIsOn(power);
   }
+
+  useEffect(() => {
+    loadDevicesData();
+  });
 
   function renderSpeed() {
     switch (speed) {
@@ -105,7 +118,7 @@ const Home = () => {
       <NavBar isListDevice={false} />
       <BackgroundLogo source={require('../../assets/images/leaf.png')} />
       <View style={{marginTop: 30}} />
-      <HomeButton powerPurifier={powerPurifier} isAdd={false} />
+      <HomeButton powerPurifier={powerPurifier} isOn={isOn} isAdd={false} />
       {isOn ? (
         <ScrollView
           style={{marginTop: 20}}
@@ -127,25 +140,6 @@ const Home = () => {
                   borderWidth={2}
                 />
               </IconView>
-            </InfoIconsRow>
-          </InfoView>
-
-          <InfoView>
-            <InfoIconsRow>
-              <View>
-                <InfoTitle>Temperatura</InfoTitle>
-                <IconRow>
-                  <Icon name="thermometer" color="#7CB342" size={40} />
-                  <InfoText>{moisture}</InfoText>
-                </IconRow>
-              </View>
-              <View>
-                <InfoTitle>Umidade</InfoTitle>
-                <IconRow>
-                  <Water name="water" color="#7CB342" size={40} />
-                  <InfoText>{temperature}</InfoText>
-                </IconRow>
-              </View>
             </InfoIconsRow>
           </InfoView>
 
