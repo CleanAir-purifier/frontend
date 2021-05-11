@@ -27,16 +27,32 @@ const DeviceCard = (props) => {
   const data = Object.values(props.metrics).map((x)=>{return parseInt(x)});
   const gasLabels = Object.keys(props.metrics);
 
-  const getAirQuality = () => {
+  const renderAirQualityText = () => {
     let quality = "-";
+    let textColor = "#7cb342";
     if (props.quality === "good") {
       quality = "Boa";
+      textColor = "#7cb342";
     } else if (props.quality === "medium") {
       quality = "Média";
+      textColor = "#ff8800";
     } else if (props.quality === "bad") {
       quality = "Ruim";
+      textColor = "#C94242";
     }
-    return quality;
+    return (<InfoText style={{color: textColor}}>{quality}</InfoText>);
+  }
+
+  const renderBatteryText = (percentage) => {
+    let textColor = "#7cb342";
+    if (percentage > 0 && percentage <= 25) {
+      textColor = "#C94242";
+    } else if (percentage > 26 && percentage <= 70) {
+      textColor = "#ff8800";
+    } else if (percentage > 70) {
+      textColor = "#7cb342";
+    }
+    return (<InfoText style={{color: textColor}}>{percentage}%</InfoText>);
   }
 
   return (
@@ -60,7 +76,8 @@ const DeviceCard = (props) => {
               <InfoTitle>Bateria</InfoTitle>
               <InconView>
                 <Icon name="battery-60" color="#303C42" size={34} />
-                <InfoText>{props.battery ? `${props.battery}%` : '-'}</InfoText>
+                {props.battery ?
+                  renderBatteryText(props.battery) : (<InfoText>-</InfoText>)}
               </InconView>
             </View>
 
@@ -143,7 +160,8 @@ const DeviceCard = (props) => {
                   <InfoTitle>Bateria</InfoTitle>
                   <InconView>
                     <Icon name="battery-60" color="#303C42" size={34} />
-                    <InfoText>{props.battery ? `${props.battery}%` : '-'}</InfoText>
+                    {props.battery ?
+                      renderBatteryText(props.battery) : (<InfoText>-</InfoText>)}
                   </InconView>
                 </View>
                 <PowerButton
@@ -170,7 +188,7 @@ const DeviceCard = (props) => {
                   <InfoTitle>Qualidade</InfoTitle>
                   <InconView>
                     <Icon name="weather-windy" color="#303C42" size={34} />
-                    <InfoText>{getAirQuality()}</InfoText>
+                    {renderAirQualityText()}
                   </InconView>
                 </View>
               </>
