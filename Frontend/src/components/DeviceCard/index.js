@@ -17,15 +17,27 @@ import {
   ChartView,
 } from './styles';
 
-const DeviceCard = () => {
-  const [deviceName, setDeviceName] = useState('device');
-  const [isOn, setIsOn] = useState(true);
+const DeviceCard = (props) => {
+  const [deviceName, setDeviceName] = useState(props.name ? props.name : 'device');
+  const [isOn, setIsOn] = useState(props.active);
   const [isOpen, setIsOpen] = useState(false);
 
   const contentInset = {top: 30, bottom: 30};
   const fill = 'rgb(124, 179,66)';
-  const data = [100, 23, 32, 3, 6];
-  const gasAray = ['Particulas', 'O2', 'CO', 'NO2', 'SO2'];
+  const data = Object.values(props.metrics).map((x)=>{return parseInt(x)});
+  const gasLabels = Object.keys(props.metrics);
+
+  const getAirQuality = () => {
+    let quality = "-";
+    if (props.quality === "good") {
+      quality = "Boa";
+    } else if (props.quality === "medium") {
+      quality = "Média";
+    } else if (props.quality === "bad") {
+      quality = "Ruim";
+    }
+    return quality;
+  }
 
   return (
     <>
@@ -48,22 +60,31 @@ const DeviceCard = () => {
               <InfoTitle>Bateria</InfoTitle>
               <InconView>
                 <Icon name="battery-60" color="#303C42" size={34} />
-                <InfoText>50%</InfoText>
+                <InfoText>{props.battery ? `${props.battery}%` : '-'}</InfoText>
               </InconView>
             </View>
 
-            <PowerView>
-              <InfoTitle>Ligado</InfoTitle>
-              <InconView>
-                <Icon name="power" color="#7cb342" size={48} />
-              </InconView>
-            </PowerView>
+            {isOn ? (
+              <PowerView>
+                <InfoTitle>Ligado</InfoTitle>
+                <InconView>
+                  <Icon name="power" color="#7cb342" size={48} />
+                </InconView>
+              </PowerView>
+            ) : (
+              <PowerView>
+                <InfoTitle>Desligado</InfoTitle>
+                <InconView>
+                  <Icon name="power" color="#C94242" size={48} />
+                </InconView>
+              </PowerView>
+            )}
 
             <View>
-              <InfoTitle>Filtro</InfoTitle>
+              <InfoTitle>Qualidade</InfoTitle>
               <InconView>
                 <Icon name="lightbulb-on" color="#303C42" size={34} />
-                <InfoText>50%</InfoText>
+                <InfoText>{getAirQuality()}</InfoText>
               </InconView>
             </View>
           </InfoRow>
@@ -93,7 +114,7 @@ const DeviceCard = () => {
                 <XAxis
                   style={{}}
                   data={data}
-                  formatLabel={(value, index) => gasAray[index]}
+                  formatLabel={(value, index) => gasLabels[index]}
                   contentInset={{left: 20, right: 20}}
                   svg={{fontSize: 10, fill: 'black'}}
                 />
@@ -122,7 +143,7 @@ const DeviceCard = () => {
                   <InfoTitle>Bateria</InfoTitle>
                   <InconView>
                     <Icon name="battery-60" color="#303C42" size={34} />
-                    <InfoText>50%</InfoText>
+                    <InfoText>{props.battery ? `${props.battery}%` : '-'}</InfoText>
                   </InconView>
                 </View>
                 <PowerButton
@@ -146,10 +167,10 @@ const DeviceCard = () => {
                   )}
                 </PowerButton>
                 <View>
-                  <InfoTitle>Filtro</InfoTitle>
+                  <InfoTitle>Qualidade</InfoTitle>
                   <InconView>
-                    <Icon name="lightbulb-on" color="#303C42" size={34} />
-                    <InfoText>50%</InfoText>
+                    <Icon name="weather-windy" color="#303C42" size={34} />
+                    <InfoText>{getAirQuality()}</InfoText>
                   </InconView>
                 </View>
               </>
@@ -182,9 +203,9 @@ const DeviceCard = () => {
                   )}
                 </PowerButton>
                 <View>
-                  <InfoTitle>Filtro</InfoTitle>
+                  <InfoTitle>Qualidade</InfoTitle>
                   <InconView>
-                    <Icon name="lightbulb-on" color="#828384" size={34} />
+                    <Icon name="weather-windy" color="#303C42" size={34} />
                   </InconView>
                 </View>
               </>

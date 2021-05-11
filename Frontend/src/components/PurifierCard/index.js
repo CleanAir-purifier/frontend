@@ -11,7 +11,20 @@ import {
   InfoText,
 } from './styles';
 
-const PurifierCard = () => {
+const PurifierCard = (props) => {
+
+  const getStatus = (status) => {
+    let text = "-";
+    if (status === "good") {
+      text = "Bom";
+    } else if (status === "medium") {
+      text = "Médio";
+    } else if (status === "bad") {
+      text = "Ruim";
+    }
+    return text;
+  }
+
   return (
     <Container>
       <Title>Purificador</Title>
@@ -20,21 +33,21 @@ const PurifierCard = () => {
           <InfoTitle>Bateria</InfoTitle>
           <InconView>
             <Icon name="battery-60" color="#303C42" size={34} />
-            <InfoText>50%</InfoText>
+            <InfoText>{props.battery ? `${props.battery}%` : '-'}</InfoText>
           </InconView>
         </View>
         <View>
           <InfoTitle>Filtro</InfoTitle>
           <InconView>
             <Icon name="air-filter" color="#303C42" size={34} />
-            <InfoText>50%</InfoText>
+            <InfoText>{props.filter_status ? getStatus(props.filter_status) : '-'}</InfoText>
           </InconView>
         </View>
         <View>
           <InfoTitle>Luz UV</InfoTitle>
           <InconView>
             <Icon name="lightbulb-on" color="#303C42" size={34} />
-            <InfoText>50%</InfoText>
+            <InfoText>{props.light_status ? getStatus(props.light_status) : '-'}</InfoText>
           </InconView>
         </View>
         <View>
