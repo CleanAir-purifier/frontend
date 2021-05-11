@@ -24,17 +24,14 @@ import { getDevices } from '../../service';
 
 const Home = () => {
   const windowWidth = Dimensions.get('window').width;
-  const [isOn, setIsOn] = useState(true);
+  const [isOn, setIsOn] = useState(false);
   const [progress, setProgress] = useState(100);
-  const [temperature, setTemperature] = useState('');
-  const [humidity, setHumidity] = useState('');
   const [speed, setSpeed] = useState('1x');
   const [mode, setMode] = useState('auto');
 
   const loadDevicesData = async () => {
     getDevices(1)
       .then((res) => {
-        console.log(res.data.active)
         powerPurifier(res.data.active);
       })
       .catch((error) => {
@@ -141,25 +138,6 @@ const Home = () => {
                   borderWidth={2}
                 />
               </IconView>
-            </InfoIconsRow>
-          </InfoView>
-
-          <InfoView>
-            <InfoIconsRow>
-              <View>
-                <InfoTitle>Temperatura</InfoTitle>
-                <IconRow>
-                  <Icon name="thermometer" color="#7CB342" size={40} />
-                  <InfoText>{temperature}</InfoText>
-                </IconRow>
-              </View>
-              <View>
-                <InfoTitle>Umidade</InfoTitle>
-                <IconRow>
-                  <Water name="water" color="#7CB342" size={40} />
-                  <InfoText>{humidity}</InfoText>
-                </IconRow>
-              </View>
             </InfoIconsRow>
           </InfoView>
 

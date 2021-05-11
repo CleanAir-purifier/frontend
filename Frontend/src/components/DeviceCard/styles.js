@@ -5,7 +5,7 @@ const windowWidth = Dimensions.get('window').width;
 
 export const Header = styled.View`
   width: ${windowWidth * 0.9}px;
-  height: 150px;
+  height: 250px;
   border-width: 4px;
   border-radius: 10px;
   border-color: #303c42;
@@ -55,7 +55,7 @@ export const TitleView = styled.View`
 
 export const Context = styled.View`
   width: ${windowWidth * 0.9}px;
-  height: 450px;
+  height: 500px;
   border-width: 4px;
   border-radius: 10px;
   border-color: #303c42;

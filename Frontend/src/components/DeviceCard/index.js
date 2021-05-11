@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Water from 'react-native-vector-icons/Entypo';
 import {BarChart, Grid, YAxis, XAxis} from 'react-native-svg-charts';
 
 import {
@@ -101,7 +102,25 @@ const DeviceCard = (props) => {
               <InfoTitle>Qualidade</InfoTitle>
               <InconView>
                 <Icon name="lightbulb-on" color="#303C42" size={34} />
-                <InfoText>{getAirQuality()}</InfoText>
+                {renderAirQualityText()}
+              </InconView>
+            </View>
+          </InfoRow>
+
+          <InfoRow style={{justifyContent: 'space-around'}}>
+            <View>
+              <InfoTitle>Temperatura</InfoTitle>
+              <InconView>
+                <Icon name="thermometer" color="#7CB342" size={34} />
+                <InfoText>{props.temperature ? `${props.temperature}ºC` : '-'}</InfoText>
+              </InconView>
+            </View>
+
+            <View>
+              <InfoTitle>Umidade</InfoTitle>
+              <InconView>
+                <Water name="water" color="#7CB342" size={28} style={{marginRight: 8}} />
+                <InfoText>{props.humidity ? `${props.humidity}%` : '-'}</InfoText>
               </InconView>
             </View>
           </InfoRow>
@@ -153,82 +172,116 @@ const DeviceCard = (props) => {
               <Icon name="chevron-down" color="#303C42" size={20} />
             </TouchableOpacity>
           </TitleView>
-          <InfoRow>
             {isOn ? (
               <>
-                <View>
-                  <InfoTitle>Bateria</InfoTitle>
-                  <InconView>
-                    <Icon name="battery-60" color="#303C42" size={34} />
-                    {props.battery ?
-                      renderBatteryText(props.battery) : (<InfoText>-</InfoText>)}
-                  </InconView>
-                </View>
-                <PowerButton
-                  onPress={() => {
-                    setIsOn(!isOn);
-                  }}>
-                  {isOn ? (
-                    <PowerView>
-                      <InfoTitle>Ligado</InfoTitle>
-                      <InconView>
-                        <Icon name="power" color="#7cb342" size={48} />
-                      </InconView>
-                    </PowerView>
-                  ) : (
-                    <PowerView>
-                      <InfoTitle>Desligado</InfoTitle>
-                      <InconView>
-                        <Icon name="power" color="#C94242" size={48} />
-                      </InconView>
-                    </PowerView>
-                  )}
-                </PowerButton>
-                <View>
-                  <InfoTitle>Qualidade</InfoTitle>
-                  <InconView>
-                    <Icon name="weather-windy" color="#303C42" size={34} />
-                    {renderAirQualityText()}
-                  </InconView>
-                </View>
+                <InfoRow>
+                  <View>
+                    <InfoTitle>Bateria</InfoTitle>
+                    <InconView>
+                      <Icon name="battery-60" color="#303C42" size={34} />
+                      {props.battery ?
+                        renderBatteryText(props.battery) : (<InfoText>-</InfoText>)}
+                    </InconView>
+                  </View>
+                  <PowerButton
+                    onPress={() => {
+                      setIsOn(!isOn);
+                    }}>
+                    {isOn ? (
+                      <PowerView>
+                        <InfoTitle>Ligado</InfoTitle>
+                        <InconView>
+                          <Icon name="power" color="#7cb342" size={48} />
+                        </InconView>
+                      </PowerView>
+                    ) : (
+                      <PowerView>
+                        <InfoTitle>Desligado</InfoTitle>
+                        <InconView>
+                          <Icon name="power" color="#C94242" size={48} />
+                        </InconView>
+                      </PowerView>
+                    )}
+                  </PowerButton>
+                  <View>
+                    <InfoTitle>Qualidade</InfoTitle>
+                    <InconView>
+                      <Icon name="weather-windy" color="#303C42" size={34} />
+                      {renderAirQualityText()}
+                    </InconView>
+                  </View>
+                </InfoRow>
+                <InfoRow style={{justifyContent: 'space-around'}}>
+                  <View>
+                    <InfoTitle>Temperatura</InfoTitle>
+                    <InconView>
+                      <Icon name="thermometer" color="#303C42" size={34} />
+                      <InfoText>{props.temperature ? `${props.temperature}ºC` : '-'}</InfoText>
+                    </InconView>
+                  </View>
+                  
+                  <View>
+                    <InfoTitle>Umidade</InfoTitle>
+                    <InconView>
+                      <Water name="water" color="#303C42" size={28} style={{marginRight: 8}} />
+                      <InfoText>{props.humidity ? `${props.humidity}%` : '-'}</InfoText>
+                    </InconView>
+                  </View>
+                </InfoRow>
               </>
             ) : (
               <>
-                <View>
-                  <InfoTitle>Bateria</InfoTitle>
-                  <InconView>
-                    <Icon name="battery-60" color="#828384" size={34} />
-                  </InconView>
-                </View>
-                <PowerButton
-                  onPress={() => {
-                    setIsOn(!isOn);
-                  }}>
-                  {isOn ? (
-                    <PowerView>
-                      <InfoTitle>Ligado</InfoTitle>
-                      <InconView>
-                        <Icon name="power" color="#7cb342" size={48} />
-                      </InconView>
-                    </PowerView>
-                  ) : (
-                    <PowerView>
-                      <InfoTitle>Desligado</InfoTitle>
-                      <InconView>
-                        <Icon name="power" color="#C94242" size={48} />
-                      </InconView>
-                    </PowerView>
-                  )}
-                </PowerButton>
-                <View>
-                  <InfoTitle>Qualidade</InfoTitle>
-                  <InconView>
-                    <Icon name="weather-windy" color="#303C42" size={34} />
-                  </InconView>
-                </View>
+                <InfoRow>
+                  <View>
+                    <InfoTitle>Bateria</InfoTitle>
+                    <InconView>
+                      <Icon name="battery-60" color="#828384" size={34} />
+                    </InconView>
+                  </View>
+                  <PowerButton
+                    onPress={() => {
+                      setIsOn(!isOn);
+                    }}>
+                    {isOn ? (
+                      <PowerView>
+                        <InfoTitle>Ligado</InfoTitle>
+                        <InconView>
+                          <Icon name="power" color="#7cb342" size={48} />
+                        </InconView>
+                      </PowerView>
+                    ) : (
+                      <PowerView>
+                        <InfoTitle>Desligado</InfoTitle>
+                        <InconView>
+                          <Icon name="power" color="#C94242" size={48} />
+                        </InconView>
+                      </PowerView>
+                    )}
+                  </PowerButton>
+                  <View>
+                    <InfoTitle>Qualidade</InfoTitle>
+                    <InconView>
+                      <Icon name="weather-windy" color="#303C42" size={34} />
+                    </InconView>
+                  </View>
+                </InfoRow>
+                <InfoRow style={{justifyContent: 'space-around'}}>
+                  <View>
+                    <InfoTitle>Temperatura</InfoTitle>
+                    <InconView>
+                      <Icon name="thermometer" color="#303C42" size={34} />
+                    </InconView>
+                  </View>
+                  
+                  <View>
+                    <InfoTitle>Umidade</InfoTitle>
+                    <InconView>
+                      <Water name="water" color="#303C42" size={28} style={{marginRight: 8}} />
+                    </InconView>
+                  </View>
+                </InfoRow>
               </>
             )}
-          </InfoRow>
         </Header>
       )}
     </>
