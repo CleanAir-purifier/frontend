@@ -20,6 +20,7 @@ import Water from 'react-native-vector-icons/Entypo';
 
 import HomeButton from '../../components/HomeButton';
 import {View, ScrollView, Dimensions, TouchableOpacity} from 'react-native';
+import NavBar from '../../components/NavBar';
 
 const Home = () => {
   const windowWidth = Dimensions.get('window').width;
@@ -101,6 +102,7 @@ const Home = () => {
 
   return (
     <Container>
+      <NavBar isListDevice={false} />
       <BackgroundLogo source={require('../../assets/images/leaf.png')} />
       <View style={{marginTop: 30}} />
       <HomeButton powerPurifier={powerPurifier} isAdd={false} />

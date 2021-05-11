@@ -1,6 +1,8 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Home from './pages/Home';
 import NoPurifier from './pages/NoPurifier';
@@ -11,31 +13,10 @@ const Stack = createStackNavigator();
 const Routes = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="ListDevices"
-          component={ListDevices}
-          options={{
-            headerStyle: {backgroundColor: '#303C42'},
-            headerTintColor: '#fff',
-          }}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerStyle: {backgroundColor: '#303C42'},
-            headerTintColor: '#fff',
-          }}
-        />
-        <Stack.Screen
-          name="noPurifier"
-          component={NoPurifier}
-          options={{
-            headerStyle: {backgroundColor: '#303C42'},
-            headerTintColor: '#fff',
-          }}
-        />
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="ListDevices" component={ListDevices} />
+        <Stack.Screen name="noPurifier" component={NoPurifier} />
       </Stack.Navigator>
     </NavigationContainer>
   );

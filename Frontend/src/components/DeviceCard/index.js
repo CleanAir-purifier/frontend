@@ -32,7 +32,14 @@ const DeviceCard = () => {
       {isOpen ? (
         <Context>
           <TitleView>
-            <View />
+            <TouchableOpacity
+              onPress={() => {
+                if (isOn) {
+                  setIsOpen(!isOpen);
+                }
+              }}>
+              <Icon name="pencil" color="#303C42" size={20} />
+            </TouchableOpacity>
             <Title>{deviceName}</Title>
             <TouchableOpacity
               onPress={() => {
@@ -40,7 +47,7 @@ const DeviceCard = () => {
                   setIsOpen(!isOpen);
                 }
               }}>
-              <Icon name="chevron-down" color="#303C42" size={20} />
+              <Icon name="chevron-up" color="#303C42" size={20} />
             </TouchableOpacity>
           </TitleView>
           <InfoRow>
@@ -104,7 +111,9 @@ const DeviceCard = () => {
       ) : (
         <Header>
           <TitleView>
-            <View />
+            <TouchableOpacity>
+              <Icon name="pencil" color="#303C42" size={20} />
+            </TouchableOpacity>
             <Title>{deviceName}</Title>
             <TouchableOpacity
               onPress={() => {
