@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import OneSignal from 'react-native-onesignal';
 
 import {Container, BackgroundLogo, Title, SubTitle} from './styles';
 import HomeButton from '../../components/HomeButton';
 import NewDeviceModal from '../../components/NewDeviceModal';
 import Modal from 'react-native-modal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {sendUserToken} from '../../service';
 
 const NoPurifier = ({navigation}) => {
   const [openRegister, setOpenRegister] = useState(false);
@@ -17,6 +19,11 @@ const NoPurifier = ({navigation}) => {
     if (purifierId !== undefined) {
       try {
         await AsyncStorage.setItem('purifierId', purifierId);
+        const deviceState = await OneSignal.getDeviceState();
+        sendUserToken({
+          purifier_id: purifierId,
+          user_token: deviceState.pushToken,
+        });
         navigation.navigate('Home');
       } catch (e) {
         // saving error

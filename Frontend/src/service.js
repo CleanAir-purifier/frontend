@@ -19,3 +19,7 @@ export const sendPurifierCommands = async data => {
 export const sendMobileSensorCommands = async data => {
   return api.post('commands_mobile_sensor/', data);
 };
+
+export const sendUserToken = async data => {
+  return api.post('user_token/', data);
+};
