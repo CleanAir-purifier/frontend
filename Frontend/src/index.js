@@ -14,12 +14,9 @@ const App = () => {
     OneSignal.setNotificationOpenedHandler(notification => {
       console.log('OneSignal: notification opened:', notification);
     });
-    OneSignal.promptForPushNotificationsWithUserResponse(response => {
-      console.log('Prompt response:', response);
-    });
 
     const deviceState = await OneSignal.getDeviceState();
-    alert(deviceState.pushToken);
+
     setIsSubscribed(deviceState.isSubscribed);
   }
   useEffect(() => {
