@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ScrollView, View} from 'react-native';
 import LottieView from 'lottie-react-native';
 
@@ -26,7 +26,7 @@ const ListDevices = () => {
       });
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     loadDevicesData();
   });
 
