@@ -17,6 +17,7 @@ import {
   Context,
   ChartView,
 } from './styles';
+import {sendMobileSensorCommands} from '../../service';
 
 const DeviceCard = props => {
   const [deviceName, setDeviceName] = useState(
@@ -28,9 +29,17 @@ const DeviceCard = props => {
   const contentInset = {top: 30, bottom: 30};
   const fill = 'rgb(124, 179,66)';
   const data = Object.values(props.metrics).map(x => {
-    return parseInt(x);
+    return parseInt(x, 10);
   });
   const gasLabels = Object.keys(props.metrics);
+
+  const powerMobileSensor = power => {
+    setIsOn(power);
+    sendMobileSensorCommands({
+      id: props.id,
+      active: power,
+    });
+  };
 
   const renderAirQualityText = () => {
     let quality = '-';
@@ -213,7 +222,7 @@ const DeviceCard = props => {
                 </View>
                 <PowerButton
                   onPress={() => {
-                    setIsOn(!isOn);
+                    powerMobileSensor(!isOn);
                   }}>
                   {isOn ? (
                     <PowerView>
@@ -277,7 +286,7 @@ const DeviceCard = props => {
                 </View>
                 <PowerButton
                   onPress={() => {
-                    setIsOn(!isOn);
+                    powerMobileSensor(!isOn);
                   }}>
                   {isOn ? (
                     <PowerView>
