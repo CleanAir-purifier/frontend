@@ -19,7 +19,7 @@ const ListDevices = () => {
         setPurifier(res.data);
         setTimeout(() => {
           setIsLoading(false);
-        }, 500);
+        }, 1000);
       })
       .catch(error => {
         console.log('error loading purifier data');
