@@ -73,7 +73,7 @@ const PurifierCard = (props) => {
           <InfoTitle>Timer</InfoTitle>
           <InconView>
             <Icon name="clock-outline" color="#303C42" size={34} />
-            <InfoText>50%</InfoText>
+            <InfoText>{props.progress ? props.progress : 100}%</InfoText>
           </InconView>
         </View>
       </InfoRow>

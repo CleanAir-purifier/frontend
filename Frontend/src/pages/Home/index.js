@@ -36,6 +36,7 @@ const Home = () => {
     getDevices(1)
       .then(res => {
         powerPurifier(res.data.active);
+        setProgress(res.data.progress);
       })
       .catch(error => {
         console.log('error loading purifier data');
