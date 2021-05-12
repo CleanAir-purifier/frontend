@@ -6,13 +6,14 @@ export const Container = styled.KeyboardAvoidingView`
   border-color: #303c42;
   border-width: 5px;
   align-items: center;
+  background-color: #f4f4f4;
 `;
 
 export const Title = styled.Text`
   margin-top: 10px;
   color: #303c42;
-  font-weight: bold;
   font-size: 24px;
+  font-family: 'Exo-Bold';
 `;
 
 export const ButtonsRow = styled.View`
@@ -40,6 +41,18 @@ export const TextInputOutline = styled.TextInput`
 
 export const InputView = styled.View`
   width: 100%;
-  height: 65%;
+  margin-top: 20px;
   align-items: center;
+`;
+export const PickerView = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
+
+export const SubTitle = styled.Text`
+  color: #303c42;
+  font-size: 16px;
+  font-family: 'Exo-Bold';
 `;

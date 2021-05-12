@@ -25,3 +25,8 @@ export const SubTitle = styled.Text`
   text-align: center;
   margin-bottom: 20px;
 `;
+export const ModalView = styled.View`
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;

@@ -1,28 +1,56 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useState} from 'react';
-import {Text, Modal} from 'react-native';
+import {Text} from 'react-native';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 import {
   Container,
   Title,
   ButtonsRow,
   OutlineButton,
-  TextInputOutline,
+  SubTitle,
   InputView,
+  PickerView,
 } from './styles';
 
-const NewDeviceModal = () => {
+const NewDeviceModal = ({onModalDismiss}) => {
+  const [purifierId, setPurifierId] = useState();
+
   return (
     <Container>
-      <Title>Novo dispositivo</Title>
+      <Title>Novo purificador</Title>
       <InputView>
-        <TextInputOutline placeholder={'Nome'} />
-        <TextInputOutline placeholder={'Id'} />
+        <SubTitle>Purificadores disponíveis</SubTitle>
+        <PickerView>
+          <ModalDropdown
+            style={{
+              height: 100,
+              width: '100%',
+              alignItems: 'center',
+              marginTop: 20,
+            }}
+            onSelect={(index, value) => {
+              setPurifierId(value);
+            }}
+            dropdownTextStyle={{fontSize: 24}}
+            options={['1']}>
+            <SubTitle>
+              {purifierId !== undefined ? purifierId : 'Por favor selecione...'}
+            </SubTitle>
+          </ModalDropdown>
+        </PickerView>
       </InputView>
       <ButtonsRow>
-        <OutlineButton>
+        <OutlineButton
+          onPress={() => {
+            onModalDismiss(purifierId);
+          }}>
           <Text>Adicionar</Text>
         </OutlineButton>
-        <OutlineButton>
+        <OutlineButton
+          onPress={() => {
+            onModalDismiss(undefined);
+          }}>
           <Text>Cancelar</Text>
         </OutlineButton>
       </ButtonsRow>
