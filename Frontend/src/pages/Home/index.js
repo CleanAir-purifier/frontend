@@ -9,19 +9,16 @@ import {
   InfoIconsRow,
   IconView,
   SimpleText,
-  IconRow,
-  InfoText,
   SelectedSpeed,
 } from './styles';
 import ProgressBar from 'react-native-progress/Bar';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Water from 'react-native-vector-icons/Entypo';
 
 import HomeButton from '../../components/HomeButton';
 import {View, ScrollView, Dimensions, TouchableOpacity} from 'react-native';
 import NavBar from '../../components/NavBar';
-import {getDevices} from '../../service';
+import {getDevices, sendPurifierCommands} from '../../service';
 
 const Home = () => {
   const windowWidth = Dimensions.get('window').width;
@@ -29,13 +26,14 @@ const Home = () => {
   const [progress, setProgress] = useState(100);
   const [speed, setSpeed] = useState('1x');
   const [mode, setMode] = useState('auto');
+  const purifierId = 1;
 
   const interval = useRef();
 
   const loadDevicesData = async () => {
-    getDevices(1)
+    getDevices(purifierId)
       .then(res => {
-        powerPurifier(res.data.active);
+        setIsOn(res.data.active);
         setProgress(res.data.progress);
       })
       .catch(error => {
@@ -45,6 +43,32 @@ const Home = () => {
 
   function powerPurifier(power) {
     setIsOn(power);
+    sendPurifierCommands({
+      id: purifierId,
+      active: power,
+      velocity: speed,
+      mode: mode,
+    });
+  }
+
+  function speedPurifier(selectedSpeed) {
+    setSpeed(selectedSpeed);
+    sendPurifierCommands({
+      id: purifierId,
+      active: isOn,
+      velocity: selectedSpeed,
+      mode: mode,
+    });
+  }
+
+  function modePurifier(selectedMode) {
+    setMode(selectedMode);
+    sendPurifierCommands({
+      id: purifierId,
+      active: isOn,
+      velocity: speed,
+      mode: selectedMode,
+    });
   }
 
   useEffect(() => {
@@ -68,13 +92,13 @@ const Home = () => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setSpeed('2x');
+                speedPurifier('2x');
               }}>
               <InfoTitle>2x</InfoTitle>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setSpeed('3x');
+                speedPurifier('3x');
               }}>
               <InfoTitle>3x</InfoTitle>
             </TouchableOpacity>
@@ -85,7 +109,7 @@ const Home = () => {
           <InfoIconsRow>
             <TouchableOpacity
               onPress={() => {
-                setSpeed('1x');
+                speedPurifier('1x');
               }}>
               <InfoTitle>1x</InfoTitle>
             </TouchableOpacity>
@@ -94,7 +118,7 @@ const Home = () => {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setSpeed('3x');
+                speedPurifier('3x');
               }}>
               <InfoTitle>3x</InfoTitle>
             </TouchableOpacity>
@@ -105,13 +129,13 @@ const Home = () => {
           <InfoIconsRow>
             <TouchableOpacity
               onPress={() => {
-                setSpeed('1x');
+                speedPurifier('1x');
               }}>
               <InfoTitle>1x</InfoTitle>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                setSpeed('2x');
+                speedPurifier('2x');
               }}>
               <InfoTitle>2x</InfoTitle>
             </TouchableOpacity>
@@ -168,7 +192,7 @@ const Home = () => {
                   </IconView>
                   <IconView
                     onPress={() => {
-                      setMode('night');
+                      modePurifier('night');
                     }}>
                     <Icon name="weather-night" color="#303C42" size={50} />
                     <SimpleText>Noturno</SimpleText>
@@ -178,7 +202,7 @@ const Home = () => {
                 <>
                   <IconView
                     onPress={() => {
-                      setMode('auto');
+                      modePurifier('auto');
                     }}>
                     <Icon name="fan" color="#303C42" size={50} />
                     <SimpleText>Automatico</SimpleText>

@@ -11,3 +11,11 @@ export const getDevices = async purifierId => {
 export const updateDeviceName = async deviceId => {
   return api.patch(`mobile_sensor/${deviceId}`);
 };
+
+export const sendPurifierCommands = async data => {
+  return api.post('commands_purifier/', data);
+};
+
+export const sendMobileSensorCommands = async data => {
+  return api.post('commands_mobileSensor/', data);
+};
