@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 
 import {
   Container,
@@ -30,6 +30,8 @@ const Home = () => {
   const [speed, setSpeed] = useState('1x');
   const [mode, setMode] = useState('auto');
 
+  const interval = useRef();
+
   const loadDevicesData = async () => {
     getDevices(1)
       .then(res => {
@@ -46,7 +48,14 @@ const Home = () => {
 
   useEffect(() => {
     loadDevicesData();
-  });
+    interval.current = setInterval(() => {
+      loadDevicesData();
+    }, 3000);
+    return () => {
+      clearInterval(interval.current);
+      interval.current = null;
+    };
+  }, []);
 
   function renderSpeed() {
     switch (speed) {
