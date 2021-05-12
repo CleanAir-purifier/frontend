@@ -1,14 +1,17 @@
 import styled from 'styled-components/native';
+import {Dimensions} from 'react-native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const OuterCircle = styled.TouchableOpacity`
-  height: 40%;
-  width: 60%;
+  height: ${windowWidth * 0.7}px;
+  width: ${windowWidth * 0.7}px;
   background-color: #303c42;
   border-color: transparent;
-  border-radius: 200px;
+  border-radius: ${(windowWidth * 0.7) / 2}px;
   align-items: center;
   justify-content: center;
-  elevation: 10;
 `;
 
 export const InnerCircle = styled.View`
