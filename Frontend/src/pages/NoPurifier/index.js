@@ -22,7 +22,7 @@ const NoPurifier = ({navigation}) => {
         const deviceState = await OneSignal.getDeviceState();
         sendUserToken({
           purifier_id: purifierId,
-          user_token: deviceState.pushToken,
+          user_token: deviceState.userId,
         });
         navigation.navigate('Home');
       } catch (e) {
