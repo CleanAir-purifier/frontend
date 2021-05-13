@@ -1,5 +1,5 @@
 {
-  "name": "Frontend",
+  "name": "CleanAir",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,15 +10,29 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-native-community/masked-view": "^0.1.11",
+    "@react-native-picker/picker": "^1.16.0",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.4",
+    "axios": "^0.21.1",
+    "lottie-ios": "3.1.8",
+    "lottie-react-native": "^4.0.2",
     "react": "17.0.1",
     "react-native": "0.64.0",
+    "react-native-dotenv": "^2.5.5",
     "react-native-gesture-handler": "^1.10.3",
+    "react-native-modal": "^11.10.0",
+    "react-native-modal-dropdown": "https://github.com/siemiatj/react-native-modal-dropdown",
+    "react-native-onesignal": "^4.1.0",
+    "react-native-progress": "^4.1.2",
     "react-native-reanimated": "^2.1.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "^3.1.1"
+    "react-native-screens": "^3.1.1",
+    "react-native-svg": "^12.1.1",
+    "react-native-svg-charts": "^5.4.0",
+    "react-native-vector-icons": "^8.1.0",
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
